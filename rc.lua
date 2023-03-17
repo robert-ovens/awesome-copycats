@@ -105,6 +105,7 @@ local vi_focus     = false -- vi-like client focus https://github.com/lcpz/aweso
 local cycle_prev   = true  -- cycle with only the previously focused client or all https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nvim"
 local browser      = "google-chrome-stable"
+local todoist      = "dex /home/robert/.local/share/applications/todoist.desktop"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5" }
@@ -188,7 +189,9 @@ local myawesomemenu = {
 
 awful.util.mymainmenu = freedesktop.menu.build {
     before = {
-        { "Awesome", myawesomemenu, beautiful.awesome_icon },
+        { "Todoist", todoist },
+        { "Awesome", myawesomemenu, beautiful.awesome_icon }
+
         -- other triads can be put here
     },
     after = {
@@ -269,6 +272,7 @@ globalkeys = mytable.join(
     awful.key({}, "XF86AudioPlay", function() audio_toggle_play_pause() end, { description="Play/Pause audio", group="Audio" }),
     awful.key({}, "XF86AudioNext", function() audio_next() end, { description="Next audio", group="Audio" }),
     awful.key({}, "XF86AudioStop", function() audio_stop() end, { description="Stop audio", group="Audio" }),
+    awful.key({ modkey, "Control"}, "t", function () awful.spawn(todoist) end, { description="Todoist", group="Applications" }),
     -- Destroy all notifications
     awful.key({ "Control",           }, "space", function() naughty.destroy_all_notifications() end,
               {description = "destroy all notifications", group = "hotkeys"}),
@@ -736,6 +740,8 @@ awful.rules.rules = {
     { rule_any = {type = { "normal", "dialog" }
       }, properties = { titlebars_enabled = true }
     },
+    { rule = { instance = "todoist.com" },
+	properties = { floating = false, maximized = false } },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
