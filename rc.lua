@@ -106,11 +106,15 @@ local cycle_prev   = true  -- cycle with only the previously focused client or a
 local editor       = os.getenv("EDITOR") or "nvim"
 local browser      = "google-chrome-stable"
 local todoist      = "dex /home/robert/.local/share/applications/todoist.desktop"
+local gmail        = "dex /home/robert/.local/share/applications/gmail.desktop"
+local calendar     = "dex /home/robert/.local/share/applications/calendar.desktop"
+local spotify      = "spotify" 
+local vccode       = "code"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5" }
 awful.layout.layouts = {
-    awful.layout.suit.floating,
+    --awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
@@ -189,7 +193,6 @@ local myawesomemenu = {
 
 awful.util.mymainmenu = freedesktop.menu.build {
     before = {
-        { "Todoist", todoist },
         { "Awesome", myawesomemenu, beautiful.awesome_icon }
 
         -- other triads can be put here
@@ -272,7 +275,12 @@ globalkeys = mytable.join(
     awful.key({}, "XF86AudioPlay", function() audio_toggle_play_pause() end, { description="Play/Pause audio", group="Audio" }),
     awful.key({}, "XF86AudioNext", function() audio_next() end, { description="Next audio", group="Audio" }),
     awful.key({}, "XF86AudioStop", function() audio_stop() end, { description="Stop audio", group="Audio" }),
-    awful.key({ modkey, "Control"}, "t", function () awful.spawn(todoist) end, { description="Todoist", group="Applications" }),
+    awful.key({ modkey, altkey}, "t", function () awful.spawn(todoist) end, { description="todoist", group="launcher" }),
+    awful.key({ modkey, altkey}, "s", function () awful.spawn(spotify) end, { description="spotify", group="launcher" }),
+    awful.key({ modkey, altkey}, "v", function () awful.spawn(vccode) end, { description="vscode", group="launcher" }),
+    awful.key({ modkey, altkey}, "g", function () awful.spawn(gmail) end, { description="gmail", group="launcher" }),
+    awful.key({ modkey, altkey}, "c", function () awful.spawn(calendar) end, { description="calendar", group="launcher" }),
+
     -- Destroy all notifications
     awful.key({ "Control",           }, "space", function() naughty.destroy_all_notifications() end,
               {description = "destroy all notifications", group = "hotkeys"}),
@@ -740,9 +748,12 @@ awful.rules.rules = {
     { rule_any = {type = { "normal", "dialog" }
       }, properties = { titlebars_enabled = true }
     },
+    { rule = { instance = "gmail.com" },
+	properties = { floating = false, maximized = false } },
+    { rule = { instance = "calendar.google.com" },
+	properties = { floating = false, maximized = false } },
     { rule = { instance = "todoist.com" },
 	properties = { floating = false, maximized = false } },
-
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
