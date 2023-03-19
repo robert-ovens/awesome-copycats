@@ -280,7 +280,8 @@ globalkeys = mytable.join(
     awful.key({ modkey, altkey}, "v", function () awful.spawn(vccode) end, { description="vscode", group="launcher" }),
     awful.key({ modkey, altkey}, "g", function () awful.spawn(gmail) end, { description="gmail", group="launcher" }),
     awful.key({ modkey, altkey}, "c", function () awful.spawn(calendar) end, { description="calendar", group="launcher" }),
-
+    awful.key({ altkey, "Control" }, "l", function () os.execute("betterlockscreen --lock dimblur") end,
+              {description = "lock screen", group = "hotkeys"}),
     -- Destroy all notifications
     awful.key({ "Control",           }, "space", function() naughty.destroy_all_notifications() end,
               {description = "destroy all notifications", group = "hotkeys"}),
