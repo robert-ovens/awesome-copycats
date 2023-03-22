@@ -94,10 +94,11 @@ local themes = {
     "powerarrow-dark", -- 7
     "rainbow",         -- 8
     "steamburn",       -- 9
-    "vertex"           -- 10
+    "vertex",          -- 10
+    "robert"           -- 11
 }
 
-local chosen_theme = themes[5]
+local chosen_theme = themes[11]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "x-terminal-emulator"
@@ -108,8 +109,12 @@ local browser      = "google-chrome-stable"
 local todoist      = "dex /home/robert/.local/share/applications/todoist.desktop"
 local gmail        = "dex /home/robert/.local/share/applications/gmail.desktop"
 local calendar     = "dex /home/robert/.local/share/applications/calendar.desktop"
+local teams        = "dex /home/robert/.local/share/applications/teams.desktop"
+local youtube        = "dex /home/robert/.local/share/applications/youtube.desktop"
+local discord      = "discord"
 local spotify      = "spotify" 
 local vccode       = "code"
+local screencapture= "flameshot gui"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5" }
@@ -276,10 +281,14 @@ globalkeys = mytable.join(
     awful.key({}, "XF86AudioNext", function() audio_next() end, { description="Next audio", group="Audio" }),
     awful.key({}, "XF86AudioStop", function() audio_stop() end, { description="Stop audio", group="Audio" }),
     awful.key({ modkey, altkey}, "t", function () awful.spawn(todoist) end, { description="todoist", group="launcher" }),
+    awful.key({ modkey, altkey}, "d", function () awful.spawn(discord) end, { description="discord", group="launcher" }),
+    awful.key({ modkey, altkey}, "e", function () awful.spawn(teams) end, { description="teams", group="launcher" }),
     awful.key({ modkey, altkey}, "s", function () awful.spawn(spotify) end, { description="spotify", group="launcher" }),
     awful.key({ modkey, altkey}, "v", function () awful.spawn(vccode) end, { description="vscode", group="launcher" }),
     awful.key({ modkey, altkey}, "g", function () awful.spawn(gmail) end, { description="gmail", group="launcher" }),
     awful.key({ modkey, altkey}, "c", function () awful.spawn(calendar) end, { description="calendar", group="launcher" }),
+    awful.key({ modkey, altkey}, "y", function () awful.spawn(youtube) end, { description="youtube", group="launcher" }),
+    awful.key({}, "Print", function () awful.spawn(screencapture) end, { description="screen capture", group="launcher" }),
     awful.key({ altkey, "Control" }, "l", function () os.execute("betterlockscreen --lock dimblur") end,
               {description = "lock screen", group = "hotkeys"}),
     -- Destroy all notifications
