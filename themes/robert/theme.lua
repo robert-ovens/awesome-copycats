@@ -188,6 +188,7 @@ local cpu = lain.widget.cpu({
 -- Coretemp
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
 local temp = lain.widget.temp({
+    tempfile = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input",
     settings = function()
         widget:set_markup(markup.font(theme.font, " " .. coretemp_now .. "°C "))
     end
@@ -318,7 +319,7 @@ function theme.at_screen_connect(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            keyboardlayout,
+           -- keyboardlayout,
             spr,
             arrl_ld,
             wibox.container.background(mpdicon, theme.bg_focus),
