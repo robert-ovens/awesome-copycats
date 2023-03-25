@@ -111,6 +111,7 @@ local gmail        = "dex /home/robert/.local/share/applications/gmail.desktop"
 local calendar     = "dex /home/robert/.local/share/applications/calendar.desktop"
 local teams        = "dex /home/robert/.local/share/applications/teams.desktop"
 local youtube        = "dex /home/robert/.local/share/applications/youtube.desktop"
+local windy        = "dex /home/robert/.local/share/applications/windy.desktop"
 local discord      = "discord"
 local spotify      = "spotify" 
 local vccode       = "code"
@@ -288,6 +289,7 @@ globalkeys = mytable.join(
     awful.key({ modkey, altkey}, "g", function () awful.spawn(gmail) end, { description="gmail", group="launcher" }),
     awful.key({ modkey, altkey}, "c", function () awful.spawn(calendar) end, { description="calendar", group="launcher" }),
     awful.key({ modkey, altkey}, "y", function () awful.spawn(youtube) end, { description="youtube", group="launcher" }),
+    awful.key({ modkey, altkey}, "w", function () awful.spawn(windy) end, { description="windy", group="launcher" }),
     awful.key({}, "Print", function () awful.spawn(screencapture) end, { description="screen capture", group="launcher" }),
     awful.key({ altkey, "Control" }, "l", function () os.execute("betterlockscreen --lock dimblur") end,
               {description = "lock screen", group = "hotkeys"}),
